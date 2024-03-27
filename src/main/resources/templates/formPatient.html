@@ -1,0 +1,46 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template1.html}">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="webjars/bootstrap/5.3.0/css/bootstrap.min.css">
+
+  <title>Title</title>
+</head>
+<body>
+<section layout:fragment="content2">
+  <div class="container">
+    <div class="card">
+      <form class="m-auto col-3" method="post" th:action="@{save}">
+
+        <div class="mb-3">
+          <label class="form-label">Nom</label>
+          <input type="text" class="form-control" name="nom" th:value="${patient.nom}">
+           <div class="alert alert-danger" th:errors="${patient.nom}"></div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">email</label>
+          <input type="text" class="form-control" name="email" th:value="${patient.email}">
+          <div class="alert alert-danger" th:errors="${patient.email}"></div>
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">phone</label>
+          <input type="password" class="form-control" name="phone" th:value="${patient.phone}">
+          <div class="alert alert-danger" th:errors="${patient.phone}"></div>
+        </div >
+
+        <button type="submit" class="btn btn-success mb-3">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+
+</body>
+<script src="webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container col-3 mt-5 pt-3 border border-dark border-danger rounded" >
+    <form method="post" th:action="@{/login}">
+
+
+        <div class="form-outline mb-4">
+            <input type="text" id="form2Example1" class="form-control" name="username" />
+            <label class="form-label" for="form2Example1">Username</label>
+        </div>
+
+
+
+        <div class="form-outline mb-4">
+            <input type="password" id="form2Example2" class="form-control" name="password" />
+            <label class="form-label" for="form2Example2">Password</label>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Sign in</button>
+
+    </form>
+</div>
+</body>
+</html>

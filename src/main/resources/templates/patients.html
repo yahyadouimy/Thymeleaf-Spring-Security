@@ -1,0 +1,86 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template1.html}">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="webjars/bootstrap/5.3.0/css/bootstrap.min.css">
+
+  <title>Title</title>
+</head>
+<body>
+<section layout:fragment="content1">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2>List patient</h2>
+        <form method="get"  th:action="@{index}" class="form-text">
+          <input type="text" name="keyword" >
+          <button type="submit" class="btn btn-success">search</button>
+        </form>
+
+
+      </div>
+
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <td>Id</td>
+            <td>Nom</td>
+            <td>email</td>
+            <td>phone</td>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">delete</td>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">edit</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="p:${listPatients}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.nom}"></td>
+            <td th:text="${p.email}" ></td>
+            <td th:text="${p.phone}"></td>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}" >
+              <button class="btn btn-danger" >
+                <a class="btn" th:href="@{delete(page=${currentPage.pageNumber},keyword=${keyword},id=${p.id})}">
+                  delete
+                </a>
+              </button>
+            </td>
+
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+              <button class="btn btn-success" >
+                <a class="btn" th:href="@{editPatient(page=${currentPage.pageNumber},keyword=${keyword},id=${p.id})}">
+                  edit
+                </a>
+              </button>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="  card-footer ">
+        <ul class="nav nav-pills justify-content-center">
+          <li  th:each="page,status:${pages}">
+            <a th:class="${status.index==currentPage.pageNumber?'btn btn-success m-1':'btn btn-outline-success m-1'}"
+               th:text="${status.index}"
+               th:href="@{index(page=${status.index},keyword=${keyword})}"
+
+            ></a>
+
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+</body>
+<script src="webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</html>
